@@ -3,4 +3,4 @@
 
 This README file contains information about my uploaded assignments
 
-My name is Elise Bennett and I give off granola vibes! 
+My name is Elise Bennett.
