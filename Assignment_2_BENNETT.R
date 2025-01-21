@@ -25,7 +25,7 @@ for (f_line in b_files) {
   first_line <- readLines(f_line, n = 1)
   cat("first line", f_line, ":", first_line, "\n")
 }
-#Personal notes: "" is just for text around "\n"
+#Personal notes: "" is just for text. "\n" is to change lines.
 
 #Do the same thing for all files that end in ".csv"
 for (file in csv_files) {
