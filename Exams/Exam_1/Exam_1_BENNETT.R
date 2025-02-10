@@ -13,6 +13,10 @@ dat <-
   #+ Use the *tidyverse* suite of packages
 #+ Selecting rows where the state starts with "A" is tricky (you can use the grepl() function or just a vector of those states if you prefer)
 
+A_states <- 
+  filter() %<%
+  ggplot(aes())
+
 #III.
  #Create a plot _of that subset_ showing Deaths over time, with a separate facet for each state. (20 pts)
   
