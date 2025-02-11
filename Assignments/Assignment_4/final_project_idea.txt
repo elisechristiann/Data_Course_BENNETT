@@ -1,3 +1,11 @@
 Assignment_4_BENNETT
 
-Deciding what to do for my project, still searching what data to use.
+I want to look at how to compare different effectors from human or plant pathogens. I will be getting my data from genome collections which show the sequences of the effectors. I want to ask questions like:
+
+Do different pathogens use the same motifs in effectors? If so, what percent of them is similar and does it matter?
+What is the evolution of effectors within a pathogen?
+What areas do effectors target most often? Does that show a weak spot within a cell?
+
+I will have to narrow down what exactly I want my project to be, but I will start by finding data collections which tell me where effectors are located and I will collect their sequences. 
+
+I am worried about limitations within where I can find data and if genomic data will be too large to deal with. I am also unsure as to where to start with a project of this scope. I will have to break it down to see what I really want to find within it. Collecting the data may guide me in finding what exactly I want to do.
