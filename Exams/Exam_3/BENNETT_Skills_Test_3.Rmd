@@ -1,0 +1,93 @@
+---
+title: "BENNETT_Skills_Test_3"
+output: html_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(broom)
+
+
+```
+
+## R Markdown
+
+This is task 1
+```{r}
+library(tidyverse)
+library(broom)
+dat <- read_csv("FacultySalaries_1995.csv")
+
+dat1 <- dat %>%
+  filter(Tier %in% c("I", "IIA","IIB")) %>%
+  select("Tier", Full="AvgFullProfSalary", Assoc="AvgAssocProfSalary", Assist="AvgAssistProfSalary", "State") %>%
+  pivot_longer(cols= c(Full,Assoc, Assist),
+               names_to= "Rank", values_to = "Salary")
+
+dat1 %>%
+  ggplot(aes(x=Rank, y=Salary, fill = Rank)) + geom_boxplot() + facet_wrap("Tier") + theme_minimal() + 
+  theme(axis.text.x = element_text(angle=45))
+
+```
+
+This is task 2
+```{r}
+anova_model <- aov(Salary~State + Tier + Rank, data=dat1)
+summary(anova_model)
+```
+
+
+Here is task 3
+
+
+```{r}
+df <- read_csv("Juniper_Oils.csv")
+
+#separating compounds
+compound <- c("alpha-pinene","para-cymene","alpha-terpineol","cedr-9-ene","alpha-cedrene","beta-cedrene","cis-thujopsene","alpha-himachalene","beta-chamigrene","cuparene","compound 1","alpha-chamigrene","widdrol","cedrol","beta-acorenol","alpha-acorenol","gamma-eudesmol","beta-eudesmol","alpha-eudesmol","cedr-8-en-13-ol","cedr-8-en-15-ol","compound 2","thujopsenal")
+
+df_clean <- df%>%
+  select(YearsSinceBurn, all_of(compound)) %>%
+  pivot_longer(cols= -YearsSinceBurn,
+               names_to = "ChemicalID",
+               values_to="Concentration")
+
+```
+Here is task 4
+```{r}
+df_clean %>%
+ggplot(aes(x = YearsSinceBurn, y = Concentration)) +
+  geom_smooth(method = "loess", se = TRUE) +
+  facet_wrap(~ ChemicalID, scales = "free_y") +
+  theme_minimal() +
+  labs(x = "YearsSinceBurn", y = "Concentration")
+
+
+```
+
+
+
+Here is task 5
+
+```{r}
+df_model <- 
+  df_clean %>%
+  group_by(ChemicalID) %>%
+  nest() %>%
+  mutate(model = map(data, ~ glm(Concentration ~ YearsSinceBurn, data =., family = gaussian())),
+         tidy_out = map(model, ~ tidy(.))) %>% unnest(tidy_out) %>%
+  filter(term == "YearsSinceBurn", p.value < 0.05) %>%
+  select(ChemicalID, estimate, std.error, statistic, p.value)
+
+print(df_model)
+```
+
+
+
+
+
+
+
+
+
